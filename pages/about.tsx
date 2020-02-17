@@ -1,11 +1,20 @@
+import { NextPage } from "next";
 import Layout from "./components/Layout";
 
-const About = () => {
+type Props = {
+  isServer: string;
+};
+const About: NextPage<Props> = ({ isServer }) => {
   return (
     <Layout>
-      <h1>about</h1>
+      <h1>about {isServer}</h1>
     </Layout>
   );
+};
+
+About.getInitialProps = async ({ req }) => {
+  const isServer = req ? "true" : "false";
+  return { isServer };
 };
 
 export default About;
