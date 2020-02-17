@@ -1,21 +1,24 @@
 import { NextPage } from "next";
 import Layout from "../components/Layout";
+import { Fragment } from "react";
 
-const Home: NextPage<{ userAgent: string; isServer: string }> = ({
-  userAgent,
-  isServer,
-}) => (
+type Props = {
+  isServer: boolean;
+};
+const Index: NextPage<Props> = ({ isServer }) => (
   <Layout>
-    <h1>
-      {isServer} Hello World - user agent : {userAgent}
-    </h1>
+    <main>
+      <h1>Hello World - this is index page.</h1>
+      <h2>
+        This page was rendering by <b>{isServer ? "SERVER" : "CLIENT"}</b>
+      </h2>
+    </main>
   </Layout>
 );
 
-Home.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers["user-agent"] || "" : navigator.userAgent;
-  const isServer = req ? "true" : "false";
-  return { userAgent, isServer };
+Index.getInitialProps = async ({ req }) => {
+  const isServer = req ? true : false;
+  return { isServer };
 };
 
-export default Home;
+export default Index;
