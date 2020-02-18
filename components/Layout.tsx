@@ -1,20 +1,21 @@
 import Header from "./Header";
-
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: "1px solid #DDD",
-};
+import styled from "styled-components";
 
 type LayoutProps = {
   children: JSX.Element;
 };
 
+const MainContainer = styled.main`
+  min-height: 100vh;
+  max-width: 600px;
+  margin: auto;
+  background-color: #fbcbcb;
+`;
 const Layout = ({ children }: LayoutProps) => (
-  <div style={layoutStyle}>
+  <MainContainer>
     <Header />
     {children}
-  </div>
+  </MainContainer>
 );
 
 export default Layout;
