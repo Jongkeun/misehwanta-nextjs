@@ -7,12 +7,20 @@ type Props = {
 };
 const Index: NextPage<Props> = ({ isServer }) => (
   <Layout>
-    <main>
+    <div>
       <h1>Hello World - this is index page.</h1>
       <h2>
         This page was rendering by <b>{isServer ? "SERVER" : "CLIENT"}</b>
       </h2>
-    </main>
+      <style jsx global>
+        {`
+          body {
+            padding: 0;
+            margin: 0;
+          }
+        `}
+      </style>
+    </div>
   </Layout>
 );
 
