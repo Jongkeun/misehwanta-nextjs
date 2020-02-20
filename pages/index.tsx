@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 type Props = {
   isServer: boolean;
 };
+
 const Index: NextPage<Props> = ({ isServer }) => (
   <Layout>
     <div>

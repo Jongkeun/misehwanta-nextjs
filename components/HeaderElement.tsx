@@ -6,6 +6,7 @@ type Props = {
   onClick: (event: any) => void;
   text: string;
 };
+
 const HeaderElement = ({ href, selected, onClick, text }: Props) => {
   return (
     <Link href={href}>

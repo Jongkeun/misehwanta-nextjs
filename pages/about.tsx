@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 type Props = {
   isServer: string;
 };
+
 const About: NextPage<Props> = ({ isServer }) => {
   return (
     <Layout>

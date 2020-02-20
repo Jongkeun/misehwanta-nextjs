@@ -11,6 +11,7 @@ const FooterContainer = styled.footer`
     bottom: -10vh;
   }
 `;
+
 const Footer = () => {
   return <FooterContainer>@copyright Jongkeun</FooterContainer>;
 };

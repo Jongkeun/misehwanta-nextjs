@@ -43,6 +43,7 @@ const Container = styled.div`
     `
       : ""}
 `;
+
 const BurgerMenu = ({ isOpen, onClick, className }: BurgerMenuProps) => {
   return (
     <Container className={className} isOpen={isOpen} onClick={onClick}>

@@ -55,6 +55,7 @@ const Container = styled.div`
     `
         : "position: staic"}
 `;
+
 const Header = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("Index");

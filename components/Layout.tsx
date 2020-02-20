@@ -18,6 +18,7 @@ const MainContainer = styled.main`
     height: 110vh;
   }
 `;
+
 const Layout = ({ children }: LayoutProps) => (
   <MainContainer>
     <Header />
