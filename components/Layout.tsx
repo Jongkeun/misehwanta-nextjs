@@ -13,6 +13,10 @@ const MainContainer = styled.main`
   max-width: 600px;
   margin: auto;
   background-color: #fbcbcb;
+
+  @media screen and (max-height: 600px) {
+    height: 110vh;
+  }
 `;
 const Layout = ({ children }: LayoutProps) => (
   <MainContainer>

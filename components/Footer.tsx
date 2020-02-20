@@ -7,6 +7,9 @@ const FooterContainer = styled.footer`
   max-width: 600px;
   color: white;
   text-align: center;
+  @media screen and (max-height: 600px) {
+    bottom: -10vh;
+  }
 `;
 const Footer = () => {
   return <FooterContainer>@copyright Jongkeun</FooterContainer>;
