@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import HeaderElement from "./HeaderElement";
+import BurgerMenu from "./BurgerMenu";
 
 type ConatinerProps = {
   isClick: boolean;
@@ -30,44 +31,36 @@ const Container = styled.div`
     background-color: #4caf50;
     color: white;
   }
-
-  & .icon {
+  .burger-menu {
     display: none;
   }
-
   @media screen and (max-width: 600px) {
-    & a:not(:first-child) {
-      display: none;
-    }
-    .topnav a.icon {
+    .burger-menu {
+      display: block;
       float: right;
-      display: block;
+      margin: 5px 10px 0 0;
     }
-  }
-
-  @media screen and (max-width: 600px) {
-    & {
-      position: ${(props: ConatinerProps) =>
-        props.isClick ? "relative" : "static"};
+    & a:not(:first-child) {
+      display: ${(props: ConatinerProps) => (props.isClick ? "block" : "none")};
     }
-    &.responsive .icon {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    &.responsive a {
-      float: none;
-      display: block;
-      text-align: left;
-    }
-  }
+    ${(props: ConatinerProps) =>
+      props.isClick
+        ? `
+      position: relative;
+      & a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+    `
+        : "position: staic"}
 `;
 const Header = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("Index");
 
   const clickMenu = (e: any): void => {
-    return setIsMobile(!isMobile);
+    return setIsClicked(!isClicked);
   };
 
   const clickHeaedElement = (event: any) => {
@@ -75,25 +68,30 @@ const Header = () => {
   };
 
   return (
-    <Container isClick={isMobile}>
+    <Container isClick={isClicked}>
       <HeaderElement
+        href={"/"}
         text={"Index"}
         onClick={clickHeaedElement}
         selected={selected === "Index"}
       />
       <HeaderElement
+        href={"/home"}
         text={"Home"}
         onClick={clickHeaedElement}
         selected={selected === "Home"}
       />
       <HeaderElement
+        href={"/about"}
         text={"About"}
         onClick={clickHeaedElement}
         selected={selected === "About"}
       />
-      <a className="icon" onClick={clickMenu}>
-        <i className="fa fa-bars"></i>
-      </a>
+      <BurgerMenu
+        className={"burger-menu"}
+        isOpen={isClicked}
+        onClick={clickMenu}
+      />
     </Container>
   );
 };
