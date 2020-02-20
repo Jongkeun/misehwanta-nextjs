@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import HeaderElement from "./HeaderElement";
 import BurgerMenu from "./BurgerMenu";
+import { useRouter } from "next/dist/client/router";
 
 type ConatinerProps = {
   isClick: boolean;
@@ -54,39 +55,30 @@ const Container = styled.div`
       }
     `
         : "position: staic"}
+  }
 `;
 
-const Header = () => {
+const Header = (props: any) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>("Index");
+  const router = useRouter();
+  const route = (router && router.route) || "/";
 
   const clickMenu = (e: any): void => {
     return setIsClicked(!isClicked);
   };
 
-  const clickHeaedElement = (event: any) => {
-    setSelected(event.target.text);
-  };
-
   return (
     <Container isClick={isClicked}>
-      <HeaderElement
-        href={"/"}
-        text={"Index"}
-        onClick={clickHeaedElement}
-        selected={selected === "Index"}
-      />
+      <HeaderElement href={"/"} text={"Index"} selected={route === "/"} />
       <HeaderElement
         href={"/home"}
         text={"Home"}
-        onClick={clickHeaedElement}
-        selected={selected === "Home"}
+        selected={route === "/home"}
       />
       <HeaderElement
         href={"/about"}
         text={"About"}
-        onClick={clickHeaedElement}
-        selected={selected === "About"}
+        selected={route === "/about"}
       />
       <BurgerMenu
         className={"burger-menu"}

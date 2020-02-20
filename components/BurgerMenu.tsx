@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 type ContainerProps = {
   isOpen: boolean;
+  className?: string;
 };
 
 type BurgerMenuProps = {
@@ -21,7 +22,7 @@ const Container = styled.div`
     background-color: #fff;
     margin: 6px 0;
     transition: 0.4s;
-    maring-left: 100px;
+    margin-left: 100px;
   }
 
   ${(props: ContainerProps) =>
@@ -44,7 +45,11 @@ const Container = styled.div`
       : ""}
 `;
 
-const BurgerMenu = ({ isOpen, onClick, className }: BurgerMenuProps) => {
+const BurgerMenu = ({
+  isOpen,
+  onClick,
+  className = "menu",
+}: BurgerMenuProps) => {
   return (
     <Container className={className} isOpen={isOpen} onClick={onClick}>
       <div className="bar1"></div>

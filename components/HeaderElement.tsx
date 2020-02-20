@@ -3,7 +3,7 @@ import Link from "next/link";
 type Props = {
   href: string;
   selected: boolean;
-  onClick: (event: any) => void;
+  onClick?: (event: any) => void;
   text: string;
 };
 
