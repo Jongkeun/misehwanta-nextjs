@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import AutocompleteInput from "./AutocompleteInput";
+import locations from "../utils/location.js";
 
 const Button = styled.button`
   button:hover {
@@ -56,12 +57,11 @@ const SearchBar = () => {
     const keys = data.values();
     console.log(keys.next());
     console.log(keys.next());
-    console.log(keys.next());
     event.preventDefault();
   };
   return (
     <Form className="example" onSubmit={actionCall}>
-      <AutocompleteInput onChanged={onChanged} />
+      <AutocompleteInput onChanged={onChanged} datas={locations} />
       <Button type="submit">Search</Button>
     </Form>
   );
