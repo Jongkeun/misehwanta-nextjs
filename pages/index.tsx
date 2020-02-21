@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Layout from "../components/Layout";
+import SearchBar from "../components/SearchBar";
 
 type Props = {
   isServer: boolean;
@@ -13,6 +14,7 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => (
       <h2>
         This page was rendering by <b>{isServer ? "SERVER" : "CLIENT"}</b>
       </h2>
+      <SearchBar />
     </div>
   </Layout>
 );
