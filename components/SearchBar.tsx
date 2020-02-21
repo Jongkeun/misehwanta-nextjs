@@ -30,7 +30,7 @@ const Form = styled.form`
     cursor: pointer;
     float: left;
     font-size: 17px;
-    padding: 10px;
+    padding: 9px;
     width: 20%;
   }
 
@@ -45,10 +45,14 @@ const Form = styled.form`
 `;
 
 const SearchBar = () => {
+  const onChanged = (params: any) => {
+    // TODO: validation check of input and fetch API
+    console.log(params);
+  };
+
   const actionCall = (event: any) => {
     // TODO: validation check of input and fetch API
     const data = new FormData(event.target);
-    console.log(data.get("search"));
     const keys = data.values();
     console.log(keys.next());
     console.log(keys.next());
@@ -57,8 +61,7 @@ const SearchBar = () => {
   };
   return (
     <Form className="example" onSubmit={actionCall}>
-      <input type="text" placeholder="Search.." name="search" />
-      <AutocompleteInput name="search" />
+      <AutocompleteInput onChanged={onChanged} />
       <Button type="submit">Search</Button>
     </Form>
   );

@@ -1,14 +1,27 @@
+import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-export default function FreeSolo(props: any) {
+type Props = {
+  onChanged: (event: any) => void;
+};
+
+const Container = styled.div`
+  width: 80%;
+  box-sizing: border-box;
+  float: left;
+
+  .MuiAutocomplete-root {
+    margin: 0;
+  }
+`;
+const AutocompleteInput = ({ onChanged }: Props) => {
   const proxy = (params: any) => {
-    console.log(params);
-    console.log(params.inputProps.value);
+    onChanged(params.inputProps.value);
     return { ...params.InputProps, type: "search" };
   };
   return (
-    <div style={{ width: 300 }}>
+    <Container>
       <Autocomplete
         id="free-solo-2-demo"
         disableClearable
@@ -25,9 +38,11 @@ export default function FreeSolo(props: any) {
           />
         )}
       />
-    </div>
+    </Container>
   );
-}
+};
+
+export default AutocompleteInput;
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
