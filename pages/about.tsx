@@ -3,19 +3,20 @@ import Layout from "../components/Layout";
 
 type Props = {
   isServer: string;
+  pathname: string;
 };
 
-const About: NextPage<Props> = ({ isServer }) => {
+const About: NextPage<Props> = ({ isServer, pathname }) => {
   return (
-    <Layout>
+    <Layout pathname={pathname}>
       <h1>about {isServer}</h1>
     </Layout>
   );
 };
 
-About.getInitialProps = async ({ req }) => {
+About.getInitialProps = async ({ req, pathname }) => {
   const isServer = req ? "true" : "false";
-  return { isServer };
+  return { isServer, pathname };
 };
 
 export default About;

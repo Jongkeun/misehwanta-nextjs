@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import HeaderElement from "./HeaderElement";
@@ -9,6 +8,9 @@ type ConatinerProps = {
   isClick: boolean;
 };
 
+type Props = {
+  pathname?: string;
+};
 const Container = styled.div`
   overflow: hidden;
   background-color: #333;
@@ -60,25 +62,23 @@ const Container = styled.div`
 
 const Header = (props: any) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const router = useRouter();
-  const route = (router && router.route) || "/";
-
+  const pathname = props.pathname;
   const clickMenu = (e: any): void => {
     return setIsClicked(!isClicked);
   };
 
   return (
     <Container isClick={isClicked}>
-      <HeaderElement href={"/"} text={"Index"} selected={route === "/"} />
+      <HeaderElement href={"/"} text={"Index"} selected={pathname === "/"} />
       <HeaderElement
         href={"/home"}
         text={"Home"}
-        selected={route === "/home"}
+        selected={pathname === "/home"}
       />
       <HeaderElement
         href={"/about"}
         text={"About"}
-        selected={route === "/about"}
+        selected={pathname === "/about"}
       />
       <BurgerMenu
         className={"burger-menu"}

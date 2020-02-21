@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 type LayoutProps = {
   children: JSX.Element;
+  pathname: string;
 };
 
 const MainContainer = styled.main`
@@ -19,9 +20,9 @@ const MainContainer = styled.main`
   }
 `;
 
-const Layout = ({ children }: LayoutProps) => (
+const Layout = ({ pathname, children }: LayoutProps) => (
   <MainContainer>
-    <Header />
+    <Header pathname={pathname} />
     {children}
     <Footer />
   </MainContainer>

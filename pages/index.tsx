@@ -3,10 +3,11 @@ import Layout from "../components/Layout";
 
 type Props = {
   isServer: boolean;
+  pathname: string;
 };
 
-const Index: NextPage<Props> = ({ isServer }) => (
-  <Layout>
+const Index: NextPage<Props> = ({ isServer, pathname }) => (
+  <Layout pathname={pathname}>
     <div>
       <h1>Hello World - this is index page.</h1>
       <h2>
@@ -16,9 +17,9 @@ const Index: NextPage<Props> = ({ isServer }) => (
   </Layout>
 );
 
-Index.getInitialProps = async ({ req }) => {
+Index.getInitialProps = async ({ req, pathname }) => {
   const isServer = req ? true : false;
-  return { isServer };
+  return { isServer, pathname };
 };
 
 export default Index;
