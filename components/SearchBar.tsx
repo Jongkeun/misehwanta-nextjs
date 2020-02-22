@@ -31,7 +31,7 @@ const Form = styled.form`
     cursor: pointer;
     float: left;
     font-size: 17px;
-    padding: 9px;
+    padding: 10px;
     width: 20%;
   }
 
