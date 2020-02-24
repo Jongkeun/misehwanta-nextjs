@@ -61,7 +61,11 @@ const SearchBar = () => {
   };
   return (
     <Form className="example" onSubmit={actionCall}>
-      <AutocompleteInput onChanged={onChanged} datas={locations} />
+      <AutocompleteInput
+        onChanged={onChanged}
+        datas={locations}
+        placeholder={"동, 면, 읍 을 입력하세요."}
+      />
       <Button type="submit">Search</Button>
     </Form>
   );

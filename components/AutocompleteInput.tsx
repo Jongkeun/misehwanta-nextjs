@@ -5,6 +5,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 type Props = {
   onChanged: (event: any) => void;
   datas: Array<{ data: string }>;
+  placeholder?: string;
 };
 
 const Container = styled.div`
@@ -12,27 +13,23 @@ const Container = styled.div`
   box-sizing: border-box;
   float: left;
 `;
-const AutocompleteInput = ({ onChanged, datas }: Props) => {
+const AutocompleteInput = ({ onChanged, datas, placeholder }: Props) => {
   const proxy = (params: any) => {
     onChanged(params.inputProps.value);
-    // TODO: make worked after 2 seconds of typing
-    if (params.inputProps.value.length > 1) {
-      return { ...params.InputProps, type: "search" };
-    } else {
-      return {};
-    }
+    return { ...params.InputProps };
   };
+
   return (
     <Container>
       <Autocomplete
         size={"small"}
         options={datas.map(option => option.data)}
-        loading={true}
-        loadingText={"Loading..."}
+        closeIcon={null}
         renderInput={params => (
           <TextField
             {...params}
-            label="동, 면, 읍 을 입력하세요."
+            type={"search"}
+            label={placeholder}
             variant="outlined"
             fullWidth
             InputProps={proxy(params)}
