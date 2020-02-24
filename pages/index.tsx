@@ -1,19 +1,21 @@
 import { NextPage } from "next";
+import styled from "styled-components";
 import Layout from "../components/Layout";
+import SearchBar from "../components/SearchBar";
 
 type Props = {
   isServer: boolean;
   pathname: string;
 };
 
+const Container = styled.div`
+  padding: 10px;
+`;
 const Index: NextPage<Props> = ({ isServer, pathname }) => (
   <Layout pathname={pathname}>
-    <div>
-      <h1>Hello World - this is index page.</h1>
-      <h2>
-        This page was rendering by <b>{isServer ? "SERVER" : "CLIENT"}</b>
-      </h2>
-    </div>
+    <Container>
+      <SearchBar />
+    </Container>
   </Layout>
 );
 
