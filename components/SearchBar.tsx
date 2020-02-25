@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import AutocompleteInput from "./AutocompleteInput";
-import locations from "../utils/location.js";
+import locations from "../utils/location";
 
 const Button = styled.button`
   button:hover {
