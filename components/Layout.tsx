@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
+import { Fragment } from "react";
 
 type LayoutProps = {
   children: JSX.Element;
@@ -10,7 +11,6 @@ type LayoutProps = {
 const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   max-width: 600px;
   margin: auto;
   background-color: #fbcbcb;
@@ -20,10 +20,15 @@ const MainContainer = styled.main`
   }
 `;
 
+const Wrapper = styled.div`
+  min-height: 90vh;
+  padding: 10px;
+`;
+
 const Layout = ({ pathname, children }: LayoutProps) => (
   <MainContainer>
     <Header pathname={pathname} />
-    {children}
+    <Wrapper>{children}</Wrapper>
     <Footer />
   </MainContainer>
 );

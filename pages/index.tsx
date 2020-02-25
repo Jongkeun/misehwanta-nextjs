@@ -3,21 +3,19 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import SearchBar from "../components/SearchBar";
 import ForecastMap from "../components/ForecastMap";
+import { Fragment } from "react";
 
 type Props = {
   isServer: boolean;
   pathname: string;
 };
 
-const Container = styled.div`
-  padding: 10px;
-`;
 const Index: NextPage<Props> = ({ isServer, pathname }) => (
   <Layout pathname={pathname}>
-    <Container>
+    <Fragment>
       <SearchBar />
       <ForecastMap />
-    </Container>
+    </Fragment>
   </Layout>
 );
 
