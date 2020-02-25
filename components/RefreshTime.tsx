@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export interface RefreshTimeProps {}
+type Props = {
+  isShown: boolean;
+};
 
 const H1 = styled.h1`
   opacity: 0;
@@ -9,14 +11,23 @@ const H1 = styled.h1`
   text-align: center;
   transition-timing-function: ease;
   transition: opacity 1s, height 1s, position 1s, margin 1s;
-  &:hover {
-    opacity: 1;
-    height: 20px;
-    margin: 10px 0 0 0;
-  }
+  ${(props: Props) => {
+    if (props.isShown) {
+      return `
+      opacity: 1;
+      height: 20px;
+      margin: 10px 0 0 0;
+      `;
+    }
+  }}
 `;
-const RefreshTime: React.SFC<RefreshTimeProps> = () => {
-  return <H1>12시</H1>;
+
+type RefreshTimeProps = {
+  time: string | undefined;
+};
+
+const RefreshTime = ({ time }: RefreshTimeProps) => {
+  return <H1 isShown={!!time}>{time}</H1>;
 };
 
 export default RefreshTime;

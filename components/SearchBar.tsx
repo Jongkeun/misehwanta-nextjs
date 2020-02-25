@@ -45,7 +45,10 @@ const Form = styled.form`
   }
 `;
 
-const SearchBar = () => {
+type SearchBarProps = {
+  onSubmit: (location: string) => string;
+};
+const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const onChanged = (params: any) => {
     // TODO: validation check of input and fetch API
     console.log(params);
@@ -58,6 +61,7 @@ const SearchBar = () => {
     console.log(keys.next());
     console.log(keys.next());
     event.preventDefault();
+    onSubmit("마천동");
   };
   return (
     <Form className="example" onSubmit={actionCall}>
