@@ -16,6 +16,7 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
     setRefreshTime("11시");
     return "12시";
   };
+
   return (
     <Layout pathname={pathname}>
       <Fragment>
