@@ -14,11 +14,15 @@ const Figure = styled.figure`
   padding: 0;
 `;
 
-const ForecastMap = () => {
+type ForecastMapProps = {
+  mapUrl: string;
+};
+
+const ForecastMap = ({ mapUrl }: ForecastMapProps) => {
   return (
     <Container>
       <Figure>
-        <Img src="http://www.airkorea.or.kr/file/viewImage/?atch_id=136525" />
+        <Img src={mapUrl} />
       </Figure>
     </Container>
   );

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-type Props = {
+type H1Props = {
   isShown: boolean;
 };
 
@@ -11,7 +11,7 @@ const H1 = styled.h1`
   text-align: center;
   transition-timing-function: ease;
   transition: opacity 1s, height 1s, position 1s, margin 1s;
-  ${(props: Props) => {
+  ${(props: H1Props) => {
     if (props.isShown) {
       return `
       opacity: 1;
@@ -24,10 +24,11 @@ const H1 = styled.h1`
 
 type RefreshTimeProps = {
   time: string | undefined;
+  isVisible: boolean;
 };
 
-const RefreshTime = ({ time }: RefreshTimeProps) => {
-  return <H1 isShown={!!time}>{time}</H1>;
+const RefreshTime = ({ time, isVisible }: RefreshTimeProps) => {
+  return <H1 isShown={isVisible}>{time}</H1>;
 };
 
 export default RefreshTime;

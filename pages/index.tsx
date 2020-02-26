@@ -21,8 +21,8 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
     <Layout pathname={pathname}>
       <Fragment>
         <SearchBar onSubmit={callForecaseApi} />
-        <RefreshTime time={refreshTime} />
-        <ForecastMap />
+        <RefreshTime time={refreshTime} isVisible={!!refreshTime} />
+        <ForecastMap mapUrl="http://www.airkorea.or.kr/file/viewImage/?atch_id=136525" />
       </Fragment>
     </Layout>
   );
