@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import ForecastMap from "../components/ForecastMap";
 import { Fragment, useState } from "react";
 import RefreshTime from "../components/RefreshTime";
+import axios from "axios";
 
 type Props = {
   isServer: boolean;
@@ -13,6 +14,9 @@ type Props = {
 const Index: NextPage<Props> = ({ isServer, pathname }) => {
   const [refreshTime, setRefreshTime] = useState<string>();
   const callForecaseApi = (location: string): string => {
+    axios.get("/api/apis").then(data => {
+      console.log(data);
+    });
     setRefreshTime("11시");
     return "12시";
   };
