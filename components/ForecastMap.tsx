@@ -15,15 +15,13 @@ const Figure = styled.figure`
 `;
 
 type ForecastMapProps = {
-  mapUrl: string;
+  mapUrl?: string;
 };
 
 const ForecastMap = ({ mapUrl }: ForecastMapProps) => {
   return (
     <Container>
-      <Figure>
-        <Img src={mapUrl} />
-      </Figure>
+      <Figure>{mapUrl && <Img src={mapUrl} />}</Figure>
     </Container>
   );
 };

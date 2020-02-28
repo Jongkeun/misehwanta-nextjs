@@ -59,7 +59,6 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
     const data = new FormData(event.target);
     const keys = data.values();
     console.log(keys.next());
-    console.log(keys.next());
     event.preventDefault();
     onSubmit("마천동");
   };
