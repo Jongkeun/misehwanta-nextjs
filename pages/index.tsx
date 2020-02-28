@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import ForecastMap from "../components/ForecastMap";
 import { Fragment, useState, useEffect } from "react";
 import RefreshTime from "../components/RefreshTime";
+import axios from "axios";
 
 type Props = {
   isServer: boolean;
@@ -15,7 +16,11 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
   const [mapUrl, setMapUrl] = useState<string>();
 
   useEffect(() => {
-    setMapUrl("https://www.airkorea.or.kr/file/viewImage/?atch_id=136675");
+    axios.get("/api/getForecastMapUrl?type=PM25&date=2020-02-28").then(data => {
+      console.log(data);
+      console.log(data.data.url);
+      setMapUrl(data.data.url);
+    });
   }, []);
 
   const callForecaseApi = (location: string): string => {
