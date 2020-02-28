@@ -5,7 +5,6 @@ import { NowRequest, NowResponse } from "@now/node";
 import { rejects } from "assert";
 
 function getAirForecast(date: string, code: string) {
-  console.log(urls.getAirForecastUrl(date, code));
   return get(urls.getAirForecastUrl(date, code), "xml")
     .then(parseToJson)
     .then(parseData)
@@ -20,7 +19,6 @@ function parseToJson(xml: any) {
 
 function parseData(data: any) {
   return new Promise((resolve, reject) => {
-    console.log(data);
     if (data.response.header.resultCode._text != "00") {
       console.log("Data: %j", data.response.body.items.item);
       reject();
