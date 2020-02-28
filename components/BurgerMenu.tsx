@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 type ContainerProps = {
   isOpen: boolean;
-  className?: string;
 };
 
 type BurgerMenuProps = {
   isOpen: boolean;
   onClick: (event: any) => void;
-  className?: string;
 };
+
 const Container = styled.div`
-  display: inline-block;
+  display: none;
   cursor: pointer;
 
   .bar1,
@@ -43,15 +42,17 @@ const Container = styled.div`
     }
     `
       : ""}
+
+  @media screen and (max-width: 600px) {
+    display: block;
+    float: right;
+    margin: 5px 10px 0 0;
+  }
 `;
 
-const BurgerMenu = ({
-  isOpen,
-  onClick,
-  className = "menu",
-}: BurgerMenuProps) => {
+const BurgerMenu = ({ isOpen, onClick }: BurgerMenuProps) => {
   return (
-    <Container className={className} isOpen={isOpen} onClick={onClick}>
+    <Container isOpen={isOpen} onClick={onClick}>
       <div className="bar1"></div>
       <div className="bar2"></div>
       <div className="bar3"></div>

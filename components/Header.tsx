@@ -2,15 +2,11 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import HeaderElement from "./HeaderElement";
 import BurgerMenu from "./BurgerMenu";
-import { useRouter } from "next/dist/client/router";
 
 type ConatinerProps = {
   isClick: boolean;
 };
 
-type Props = {
-  pathname?: string;
-};
 const Container = styled.div`
   overflow: hidden;
   background-color: #333;
@@ -34,15 +30,8 @@ const Container = styled.div`
     background-color: #4caf50;
     color: white;
   }
-  .burger-menu {
-    display: none;
-  }
+
   @media screen and (max-width: 600px) {
-    .burger-menu {
-      display: block;
-      float: right;
-      margin: 5px 10px 0 0;
-    }
     & a:not(:first-child) {
       display: ${(props: ConatinerProps) => (props.isClick ? "block" : "none")};
     }
@@ -80,11 +69,7 @@ const Header = (props: any) => {
         text={"About"}
         selected={pathname === "/about"}
       />
-      <BurgerMenu
-        className={"burger-menu"}
-        isOpen={isClicked}
-        onClick={clickMenu}
-      />
+      <BurgerMenu isOpen={isClicked} onClick={clickMenu} />
     </Container>
   );
 };
