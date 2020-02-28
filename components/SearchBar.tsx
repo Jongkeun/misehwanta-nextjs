@@ -50,8 +50,7 @@ type SearchBarProps = {
 };
 const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const onChanged = (params: any) => {
-    // TODO: validation check of input and fetch API
-    console.log(params);
+    // console.log(params);
   };
 
   const actionCall = (event: any) => {

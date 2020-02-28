@@ -8,7 +8,8 @@ function getAirForecast(date: string, code: string) {
   return get(urls.getAirForecastUrl(date, code), "xml")
     .then(parseToJson)
     .then(parseData)
-    .then(getMapUrl);
+    .then(getMapUrl)
+    .then(httpTohttps);
 }
 
 function parseToJson(xml: any) {
@@ -34,6 +35,10 @@ function getMapUrl(data: any) {
     else if (type === "PM25") resolve(data[0].imageUrl8._text);
     else reject();
   });
+}
+
+function httpTohttps(url: any) {
+  return Promise.resolve(url.replace("http://", "https://"));
 }
 
 export default (req: NowRequest, res: NowResponse) => {
