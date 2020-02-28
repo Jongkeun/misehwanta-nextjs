@@ -16,7 +16,7 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
   const [mapUrl, setMapUrl] = useState<string>();
 
   useEffect(() => {
-    axios.get("/api/getForecastMapUrl?type=PM10&date=2020-02-28").then(data => {
+    axios.get("/api/getForecastMapUrl?type=PM25&date=2020-02-28").then(data => {
       console.log(data);
       console.log(data.data.url);
       setMapUrl(data.data.url);

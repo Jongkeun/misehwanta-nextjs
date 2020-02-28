@@ -1,7 +1,8 @@
-import * as urls from "./urls";
+import * as urls from "../../utils/urls";
 import convert from "xml-js";
 import { get } from "../../utils/webRequest";
 import { NowRequest, NowResponse } from "@now/node";
+import { rejects } from "assert";
 
 function getAirForecast(date: string, code: string) {
   return get(urls.getAirForecastUrl(date, code), "xml")
@@ -27,8 +28,11 @@ function parseData(data: any) {
 }
 
 function getMapUrl(data: any) {
-  return new Promise((resolve, rejext) => {
-    resolve(data[0].imageUrl7._text);
+  return new Promise((resolve, reject) => {
+    const type = data[0].informCode._text;
+    if (type === "PM10") resolve(data[0].imageUrl7._text);
+    else if (type === "PM25") resolve(data[0].imageUrl8._text);
+    else reject();
   });
 }
 
