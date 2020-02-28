@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import AutocompleteInput from "./AutocompleteInput";
 import locations from "../utils/location";
+import { useState } from "react";
 
 const Button = styled.button`
   button:hover {
@@ -12,7 +13,7 @@ const Form = styled.form`
     box-sizing: border-box;
   }
 
-  &.example input[type="text"] {
+  & input[type="text"] {
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
@@ -21,7 +22,7 @@ const Form = styled.form`
     background: #f1f1f1;
   }
 
-  &.example ${Button} {
+  & ${Button} {
     background-color: #2196f3;
     border-bottom: 1px solid gray;
     border-right: 1px solid gray;
@@ -35,10 +36,10 @@ const Form = styled.form`
     width: 20%;
   }
 
-  &.example ${Button}:hover {
+  & ${Button}:hover {
     background: #0b7dda;
   }
-  &.example::after {
+  &::after {
     content: "";
     clear: both;
     display: table;
@@ -48,21 +49,19 @@ const Form = styled.form`
 type SearchBarProps = {
   onSubmit: (location: string) => string;
 };
+
 const SearchBar = ({ onSubmit }: SearchBarProps) => {
+  const [location, setLocation] = useState<string>("");
   const onChanged = (params: any) => {
-    // console.log(params);
+    setLocation(params);
   };
 
   const actionCall = (event: any) => {
-    // TODO: validation check of input and fetch API
-    const data = new FormData(event.target);
-    const keys = data.values();
-    console.log(keys.next());
     event.preventDefault();
-    onSubmit("마천동");
+    onSubmit(location);
   };
   return (
-    <Form className="example" onSubmit={actionCall}>
+    <Form onSubmit={actionCall}>
       <AutocompleteInput
         onChanged={onChanged}
         datas={locations}

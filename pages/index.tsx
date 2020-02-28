@@ -23,6 +23,7 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
   }, []);
 
   const callForecaseApi = (location: string): string => {
+    console.log(location);
     setRefreshTime("11시");
     return "12시";
   };
