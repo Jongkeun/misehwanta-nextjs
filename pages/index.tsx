@@ -23,7 +23,9 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
   }, []);
 
   const callForecaseApi = (location: string): string => {
-    console.log(location);
+    axios.get(`/api/getPixelLocation?name=${location}`).then(data => {
+      console.log(data.data);
+    });
     setRefreshTime("11시");
     return "12시";
   };

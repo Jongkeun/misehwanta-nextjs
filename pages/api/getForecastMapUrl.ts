@@ -1,21 +1,13 @@
 import * as urls from "../../utils/urls";
-import convert from "xml-js";
-import { get } from "../../utils/webRequest";
+import { get, xmlToJson } from "../../utils/webRequest";
 import { NowRequest, NowResponse } from "@now/node";
-import { rejects } from "assert";
 
 function getAirForecast(date: string, code: string) {
   return get(urls.getAirForecastUrl(date, code), "xml")
-    .then(parseToJson)
+    .then(xmlToJson)
     .then(parseData)
     .then(getMapUrl)
     .then(httpTohttps);
-}
-
-function parseToJson(xml: any) {
-  return new Promise((resolve, reject) => {
-    resolve(JSON.parse(convert.xml2json(xml, { compact: true })));
-  });
 }
 
 function parseData(data: any) {
