@@ -1,7 +1,6 @@
-// var gifFrames = require("gif-frames");
 import { NowRequest, NowResponse } from "@now/node";
-import gifFrames from "gif-frames";
 import concat from "concat-stream";
+var gifFrames = require("gif-frames");
 
 function callback(frameData: any) {
   return new Promise((resolve, reject) => {
