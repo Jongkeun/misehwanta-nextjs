@@ -4,7 +4,7 @@ const concat = require("concat-stream");
 
 function callback(frameData: any) {
   return new Promise((resolve, reject) => {
-    let a = Promise.all(frameData.map(async frame => getBase64(frame)));
+    let a = Promise.all(frameData.map(async (frame: any) => getBase64(frame)));
     resolve(a);
   });
 }
@@ -12,7 +12,7 @@ function callback(frameData: any) {
 async function getBase64(frame: any) {
   return new Promise((resolve, reject) => {
     return frame.getImage().pipe(
-      concat({ encoding: "buffer" }, function(buf) {
+      concat({ encoding: "buffer" }, function(buf: any) {
         resolve("data:image/png;base64," + buf.toString("base64"));
       }),
     );
