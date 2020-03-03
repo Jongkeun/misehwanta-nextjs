@@ -8,13 +8,14 @@ import {
   totalMapWidth,
   standardMapHeight,
   totalMapHeight,
+  squareSize,
 } from "../../utils/define";
 
 function parseData(data: any) {
   const locations = data.response.body.items;
   const item = locations.item.length > 1 ? locations.item[0] : locations.item;
-  const tmX = item.tmX._text;
-  const tmY = item.tmY._text;
+  const tmX = parseInt(item.tmX._text) - squareSize / 2;
+  const tmY = parseInt(item.tmY._text) - squareSize / 2;
   return { tmX, tmY };
 }
 
