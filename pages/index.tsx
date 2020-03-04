@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import SearchBar from "../components/SearchBar";
 import ForecastMap from "../components/ForecastMap";
 import RefreshTime from "../components/RefreshTime";
+import { getDominantColor } from "../utils/calculateTime";
 
 type Props = {
   isServer: boolean;
@@ -55,32 +56,10 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext("2d");
             if (ctx) {
-              Img.onload = function() {
-                //ctx.drawImage(Img, posX, posY, 10, 10, 0, 0, 10, 10);
-                ctx.drawImage(Img, 0, 0, 820, 830);
-                rect({
-                  ctx,
-                  x: 131 + posX - 5,
-                  y: 160 + posY - 5,
-                  width: 10,
-                  height: 10,
-                });
-                const rgba = ctx.getImageData(0, 0, width, height).data;
-                let colors = [];
-                console.log(rgba);
-                for (var px = 0, ct = width * height * 4; px < ct; px += 4) {
-                  var r = rgba[px];
-                  var g = rgba[px + 1];
-                  var b = rgba[px + 2];
-                  // var a = rgba[px + 3];
-                  //if (Utils.isInclude(standardMp, [r, g, b])) colors.push([r, g, b]);
-                  console.log(r, g, b);
-                }
-              };
-              // ctx.fillStyle = "#FF0000";
-              // ctx.fillRect(0, 0, 150, 75);
-
-              //ctx.drawImage(Img, 100, 100);
+              getDominantColor(ctx, data.data.srcArr, {
+                pointX: posX,
+                pointY: posY,
+              });
             }
           }
         });
