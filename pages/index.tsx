@@ -6,25 +6,26 @@ import SearchBar from "../components/SearchBar";
 import ForecastMap from "../components/ForecastMap";
 import RefreshTime from "../components/RefreshTime";
 import { getDominantColor } from "../utils/calculateTime";
+const gifFrames = require("gif-frames");
+const concat = require("concat-stream");
 
 type Props = {
   isServer: boolean;
   pathname: string;
-  datass: any;
+  datas: any;
 };
 
-const Index: NextPage<Props> = ({ isServer, pathname, datass }) => {
+const Index: NextPage<Props> = ({ isServer, pathname, datas }) => {
   const [refreshTime, setRefreshTime] = useState<string>();
   const [mapUrl, setMapUrl] = useState<string>();
   const [mapArr, setMapArr] = useState();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
-    // axios.get("/api/getForecastMapUrl?type=PM25&date=2020-02-28").then(data => {
-    //   console.log(data.data.url);
-    //   setMapUrl(data.data.url);
-    // });
-    //axios.get("/page/b").then(data => console.log(data));
-    console.log(datass);
+    axios.get("/api/getForecastMapUrl?type=PM25&date=2020-02-28").then(data => {
+      console.log(data.data.url);
+      setMapUrl(data.data.url);
+    });
+    console.log(datas);
   }, []);
 
   const callForecaseApi = (location: string): string => {
@@ -92,10 +93,39 @@ const Index: NextPage<Props> = ({ isServer, pathname, datass }) => {
 
 Index.getInitialProps = async ({ req, pathname }) => {
   const isServer = req ? true : false;
-  let datas = await axios.get("http://misehwanta.cafe24app.com/page/a");
-  console.log(datas.data);
-  const datass = datas.data;
-  return { isServer, pathname, datass };
+  let data = await axios.get("http://misehwanta.cafe24app.com/page/a");
+  // console.log(data.data);
+  // const datas = data.data;
+  function callback(frameData: any) {
+    return new Promise((resolve, reject) => {
+      let a = Promise.all(
+        frameData.map(async (frame: any) => getBase64(frame)),
+      );
+      resolve(a);
+    });
+  }
+
+  async function getBase64(frame: any) {
+    return new Promise((resolve, reject) => {
+      return frame.getImage().pipe(
+        concat({ encoding: "buffer" }, function(buf: any) {
+          resolve("data:image/png;base64," + buf.toString("base64"));
+        }),
+      );
+    });
+  }
+  // "https://www.airkorea.or.kr/file/viewImage/?atch_id=136808"
+  const obj = {
+    url: "https://www.airkorea.or.kr/file/viewImage/?atch_id=136808",
+    frames: "0-23",
+    outputType: "png",
+    cumulative: false,
+  };
+
+  let a = await gifFrames(obj);
+  let b = await callback(a);
+  const datas = b;
+  return { isServer, pathname, datas };
 };
 
 export default Index;
