@@ -10,18 +10,21 @@ import { getDominantColor } from "../utils/calculateTime";
 type Props = {
   isServer: boolean;
   pathname: string;
+  datass: any;
 };
 
-const Index: NextPage<Props> = ({ isServer, pathname }) => {
+const Index: NextPage<Props> = ({ isServer, pathname, datass }) => {
   const [refreshTime, setRefreshTime] = useState<string>();
   const [mapUrl, setMapUrl] = useState<string>();
   const [mapArr, setMapArr] = useState();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
-    axios.get("/api/getForecastMapUrl?type=PM25&date=2020-02-28").then(data => {
-      console.log(data.data.url);
-      setMapUrl(data.data.url);
-    });
+    // axios.get("/api/getForecastMapUrl?type=PM25&date=2020-02-28").then(data => {
+    //   console.log(data.data.url);
+    //   setMapUrl(data.data.url);
+    // });
+    //axios.get("/page/b").then(data => console.log(data));
+    console.log(datass);
   }, []);
 
   const callForecaseApi = (location: string): string => {
@@ -89,7 +92,10 @@ const Index: NextPage<Props> = ({ isServer, pathname }) => {
 
 Index.getInitialProps = async ({ req, pathname }) => {
   const isServer = req ? true : false;
-  return { isServer, pathname };
+  let datas = await axios.get("http://misehwanta.cafe24app.com/page/a");
+  console.log(datas.data);
+  const datass = datas.data;
+  return { isServer, pathname, datass };
 };
 
 export default Index;
