@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import convert from "xml-js";
 
 export function get(url: string, returnType = "json") {
   return new Promise((resolve, reject) =>
@@ -14,4 +15,8 @@ export function get(url: string, returnType = "json") {
         reject(error);
       }),
   );
+}
+
+export function xmlToJson(xml: any) {
+  return JSON.parse(convert.xml2json(xml, { compact: true }));
 }
